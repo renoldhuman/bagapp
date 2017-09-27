@@ -1,2 +1,3 @@
 # bagapp
-BagApp project
+BagApp project by Tyler Helmrich and Alec Lucas
+
