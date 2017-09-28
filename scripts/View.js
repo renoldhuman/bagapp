@@ -1,5 +1,5 @@
 var list = [];
-var totalWeight = 0;
+var itemList = [];
 
 var tWeightContainer = document.createElement("div");
 var tWeightText = document.createElement("p");
@@ -8,54 +8,29 @@ document.body.appendChild(tWeightContainer);
 
 var listContainer = document.createElement("div");
 document.body.appendChild(listContainer);
-function Item(itemName, itemWeight, itemQuantity){
-	this.itemName = itemName;
-	this.itemWeight = itemWeight;
-	this.itemQuantity = itemQuantity;
 
-	this.addItem = function(){
-		this.itemQuantity++;
-		this.itemWeight+=itemWeight;
-	}
-
-	this.dropItem = function(){
-		this.itemQuantity--;
-		this.itemWeight-=itemWeight;
-	}
-
-	this.getItemWeight = function(){
-		return ""+itemWeight;
-	}
-
-	this.getItemName = function(){
-		return ""+itemName;
-	}
-
-	this.getItemQuantity = function(){
-		return ""+itemQuantity;
-	}
+function viewBag(){
+	Bag.getContents();
 }
 
-function addItem(itemName, itemWeight, itemQuantity){
-	var newItem = new Item(itemName, itemWeight, itemQuantity);
-	list.push(newItem);
-	totalWeight+=itemWeight*itemQuantity;
+itemList.push(new newItem("sword", 10));
+itemList.push(new newItem("helmet", 5));
+itemList.push(new newItem("bedroll", 2));
+
+for(var i = 0; i < itemList.length; i++){
+	addItemToBag(itemList[i], 1);
+	console.log(itemList[i]);
 }
 
-addItem("Sword", 10, 1);
-addItem("Helmet", 5, 1);
-addItem("Bedroll", 2, 1);
+// for(var i=0; i<list.length; i++){
+// 	var listItem = document.createElement("p");
+// 	var listItemContent = document.createTextNode(list[i].getItemName()+"     "+list[i].getItemQuantity());
+// 	listItem.appendChild(listItemContent);
+// 	listItem.id=""+i;
+// 	listContainer.appendChild(listItem);
+// 	//console.log(list[i].getItemName()+"     "+list[i].getItemQuantity());
 
-
-for(var i=0; i<list.length; i++){
-	var listItem = document.createElement("p");
-	var listItemContent = document.createTextNode(list[i].getItemName()+"     "+list[i].getItemQuantity());
-	listItem.appendChild(listItemContent);
-	listItem.id=""+i;
-	listContainer.appendChild(listItem);
-	//console.log(list[i].getItemName()+"     "+list[i].getItemQuantity());
-
-}
-var totalWeightText = document.createTextNode("Total Weight: "+totalWeight);
+// }
+var totalWeightText = document.createTextNode("Total Weight: "+getTotalWeight());
 tWeightText.appendChild(totalWeightText);
 //console.log("Total Weight: "+totalWeight);
