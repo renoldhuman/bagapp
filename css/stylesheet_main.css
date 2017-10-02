@@ -1,0 +1,25 @@
+.Name, .Quantity{
+	display: inline;
+}
+
+#weightText{
+	position: relative;
+	left: 43%;
+}
+
+#listContainer{
+	position: relative;
+	left: 25%;
+	width: 50%;
+}
+
+.listItem{
+	width: 100%;
+}
+
+.Quantity{
+	position: absolute;
+	right: 0;
+	margin: 0%;
+}
+
