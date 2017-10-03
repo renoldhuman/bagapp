@@ -11,9 +11,13 @@ tWeightContainer.appendChild(tWeightText);
 document.body.appendChild(tWeightContainer);//allows the totalweight sting to be viewed on the string
 
 
-var listContainer = document.createElement("div");//container for entire list on document
-listContainer.id = "listContainer";
-document.body.appendChild(listContainer);
+// var listContainer = document.createElement("div");//container for entire list on document
+// listContainer.id = "listContainer";
+// document.body.appendChild(listContainer);
+
+var itemTable = document.createElement("table")
+itemTable.id = "itemTable";
+document.body.appendChild(itemTable);
 
 //event listeners for buttons on screen
 document.getElementById("addItemButton").addEventListener("click",addItemPrompt);
@@ -58,6 +62,41 @@ function createNewListItem(newItem, itemLocal){
 		listContainer.appendChild(listItem);
 }
 
+function createNewTableRow(newItem){
+	var row = document.createElement("tr");
+	var mButton = document.createElement("button");
+	var pButton = document.createElement("button");
+
+	mButton.innerHTML = "-";
+	pButton.innerHTML = "+";
+
+	var itemName = document.createElement("td");
+	itemName.innerHTML = ""+newItem.itemName;
+	itemName.style.width = "80%";
+	row.appendChild(itemName);
+
+	var minusButton = document.createElement("td");
+	minusButton.appendChild(mButton);
+	minusButton.style.width = "6.67%";
+	minusButton.style.textAlign = "center";
+	//minusButton.style.display = "none";
+	row.appendChild(minusButton);
+
+	var quantity = document.createElement("td");
+	quantity.innerHTML = ""+newItem.itemQuantity;
+	quantity.style.width = "6.67%";
+	quantity.style.textAlign = "center";
+	row.appendChild(quantity);
+
+	var plusButton = document.createElement("td");
+	plusButton.appendChild(pButton);
+	plusButton.style.width = "6.67%";
+	plusButton.style.textAlign = "center";
+	row.appendChild(plusButton);
+
+	itemTable.appendChild(row);
+}
+
 function addItem(){
 	var name = document.getElementById("itemName");
 	var weight = document.getElementById("itemWeight");
@@ -80,7 +119,8 @@ function addItem(){
 	else{
 		var newItem = new Item(name.value, weight.value, quantity.value);
 		var itemLocal = Bag.addItemToBag(newItem);
-		createNewListItem(newItem, itemLocal);
+		createNewTableRow(newItem);
+		//createNewListItem(newItem, itemLocal);
 	}
 
 	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
