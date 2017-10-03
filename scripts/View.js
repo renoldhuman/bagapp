@@ -5,20 +5,22 @@ var Bag = new Bag(1000);
 var tWeightContainer = document.createElement("div");//container for totalweight in document
 var tWeightText = document.createElement("p");//paragraph tag for tweight text
 tWeightText.id="weightText";
-tWeightText.innerHTML = "Total Weight: "+Bag.getTotalWeight();
+tWeightText.innerHTML = "Total Weight: "+Bag.getTotalWeight(); //gets the totalweight in the bag and appends it to the totalweight box
 
 tWeightContainer.appendChild(tWeightText);
-document.body.appendChild(tWeightContainer);
+document.body.appendChild(tWeightContainer);//allows the totalweight sting to be viewed on the string
 
 
 var listContainer = document.createElement("div");//container for entire list on document
 listContainer.id = "listContainer";
 document.body.appendChild(listContainer);
 
-
+//event listeners for buttons on screen
 document.getElementById("addItemButton").addEventListener("click",addItemPrompt);
 document.getElementById("addButton").addEventListener("click",addItem);
 document.getElementById("closeButton").addEventListener("click",closePrompt);
+
+//Makes a popup appear in the middle of the screen 
 
 // function makePopUp(w, h, id){
 // 	var popup = document.createElement("div");
@@ -31,11 +33,35 @@ document.getElementById("closeButton").addEventListener("click",closePrompt);
 // 	document.body.appendChild(popup);
 // }
 
+
+/*
+	Makes a new Item and adds to the bag
+	Then creates a listitem adding the newly created items
+	name and quanity to the list item and then appends
+	the listitem to the listcontainer
+*/
+function createNewListItem(newItem, itemLocal){
+		var listItem = document.createElement("div");
+		listItem.className = "listItem";
+		listItem.id = "" + itemLocal;
+
+		var listItemName = document.createElement("p");
+		listItemName.innerHTML = ""+newItem.itemName;
+		listItemName.className = "Name";
+		listItem.appendChild(listItemName);
+
+		var listItemQuantity = document.createElement("p");
+		listItemQuantity.innerHTML = ""+newItem.itemQuantity;
+		listItemQuantity.className = "Quantity";
+		listItem.appendChild(listItemQuantity);
+		
+		listContainer.appendChild(listItem);
+}
+
 function addItem(){
 	var name = document.getElementById("itemName");
 	var weight = document.getElementById("itemWeight");
 	var quantity = document.getElementById("itemQuantity");
-	//console.log(weight.value);
 	
 	if(weight.value!=null){
 		if(weight.value<0||quantity.value<=0){
@@ -54,29 +80,7 @@ function addItem(){
 	else{
 		var newItem = new Item(name.value, weight.value, quantity.value);
 		var itemLocal = Bag.addItemToBag(newItem);
-
-		//Need to find an easy way to access an item once it's in the bag
-		//Maybe a quicksort by name
-		// var listItem = document.createElement("p");
-		// listItem.innerHTML = ""+newItem.itemName+"     "+quantity.value;
-
-		var listItem = document.createElement("div");
-		listItem.className = "listItem";
-		listItem.id = "" + itemLocal;
-
-		var listItemName = document.createElement("p");
-		listItemName.innerHTML = ""+newItem.itemName;
-		listItemName.className = "Name";
-		listItem.appendChild(listItemName);
-
-		var listItemQuantity = document.createElement("p");
-		listItemQuantity.innerHTML = ""+newItem.itemQuantity;
-		listItemQuantity.className = "Quantity";
-		listItem.appendChild(listItemQuantity);
-		//var listItemContent = document.createTextNode(newItem.itemName+"     "+quantity.value);
-		//listItem.appendChild(listItemContent);
-		
-		listContainer.appendChild(listItem);
+		createNewListItem(newItem, itemLocal);
 	}
 
 	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
@@ -98,83 +102,6 @@ function closePrompt(){
 
 function addItemPrompt(){
 	document.getElementById("popdiv").style.display = "initial";
-	// makePopUp(300, 150, "popdiv");
-	// var form = document.createElement("form");
-	
-	// var nameBox = document.createElement("input");
-	// nameBox.type = "text";
-	// nameBox.id = "itemName";
-	// nameBox.className = "addItemForm";
-	// nameBox.placeholder = "Item Name";
-	// form.appendChild(nameBox);
-
-	// var weightBox = document.createElement("input");
-	// weightBox.type = "text";
-	// weightBox.id = "itemWeight";
-	// weightBox.className = "addItemForm";
-	// weightBox.placeholder = "Item Weight";
-	// form.appendChild(weightBox);
-
-	// var quantityBox = document.createElement("input");
-	// quantityBox.type = "text";
-	// quantityBox.id = "itemQuantity";
-	// quantityBox.className = "addItemForm";
-	// quantityBox.placeholder = "Item Quantity";
-	// form.appendChild(quantityBox);
-
-	// document.getElementById("popdiv").appendChild(form);
-	// var name = document.getElementById("itemName");
-	// var weight = document.getElementById("itemWeight");
-	// var quantity = document.getElementById("itemQuantity");
-	// //console.log(weight.value);
-	
-	// if(weight.value!=null){
-	// 	if(weight.value<0||quantity.value<=0){
-	// 	console.log("please enter proper weight and quantity");
-	// 	return;
-	// 	}
-	// }
-
-	// var local = Bag.checkBagLocation(name.value);
-
-	// if(local!=-1){
-	// 	Bag.increaseItemQuantity(local, quantity.value);
-	// 	document.getElementById(""+local).lastElementChild.innerHTML = ""+Bag.getContents(local).itemQuantity;
-	// }
-
-	// else{
-	// 	var newItem = new Item(name.value, weight.value, quantity.value);
-	// 	var itemLocal = Bag.addItemToBag(newItem);
-
-	// 	//Need to find an easy way to access an item once it's in the bag
-	// 	//Maybe a quicksort by name
-	// 	// var listItem = document.createElement("p");
-	// 	// listItem.innerHTML = ""+newItem.itemName+"     "+quantity.value;
-
-	// 	var listItem = document.createElement("div");
-	// 	listItem.className = "listItem";
-	// 	listItem.id = "" + itemLocal;
-
-	// 	var listItemName = document.createElement("p");
-	// 	listItemName.innerHTML = ""+newItem.itemName;
-	// 	listItemName.className = "Name";
-	// 	listItem.appendChild(listItemName);
-
-	// 	var listItemQuantity = document.createElement("p");
-	// 	listItemQuantity.innerHTML = ""+newItem.itemQuantity;
-	// 	listItemQuantity.className = "Quantity";
-	// 	listItem.appendChild(listItemQuantity);
-	// 	//var listItemContent = document.createTextNode(newItem.itemName+"     "+quantity.value);
-	// 	//listItem.appendChild(listItemContent);
-		
-	// 	listContainer.appendChild(listItem);
-	// }
-
-	// tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
-
-	// //name.value = null;
-	// //weight.value = null;
-	// quantity.value = 1;
 }
 
 
