@@ -4,7 +4,9 @@
 
 #weightText{
 	position: relative;
-	left: 43%;
+	left: 50%;
+	width: 123px;
+	margin-left: -62.5px;
 }
 
 #listContainer{
@@ -17,9 +19,51 @@
 	width: 100%;
 }
 
-.Quantity{
+#buttonsDiv{
+	width: 166px;
+	position: relative;
+	top:10%;
+	left:50%;
+	margin-left: -83px;
+	/*margin-top: 3.5%;*/
+	
+}
+
+.Quantity, #addButton{
 	position: absolute;
 	right: 0;
 	margin: 0%;
 }
+
+#closeButton{
+	position: absolute;
+	left: 0;
+	margin: 0%;
+}
+
+#popdiv{
+	display: none;
+	background-color: white;
+	border: solid;
+	border-color: #9e9e9e;
+	box-shadow: 3px 3px 1.5px #888888;
+	position: fixed;
+	width: 300px;
+	height: 150px;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+}
+
+.addItemForm{
+	display: block;
+	position: relative;
+	top:50%;
+	left:50%;
+	margin-left: -83px;
+	margin-top: 3.5%;
+}
+
+
 

@@ -6,13 +6,15 @@
 </head>
 <body>
 
-<button id="addButton">Add Item</button>
-<form>
-	<p id="nameBox">Item Name:</p> <input type="text" id="itemName">
-	<p id="weightBox">Weight:</p> <input type="text" id="itemWeight" >
-	<p id="quantityBox">Quantity:</p> <input type="text" id="itemQuantity" value=1>
-</form>
-
+<button id="addItemButton">Add Item</button>
+	<div class="popup" id="popdiv">
+		<form id="itemForm">
+			<input type="text" id="itemName" class= "addItemForm" placeholder="Item Name">
+			<input type="text" id="itemWeight" class= "addItemForm" placeholder="Item Weight">
+			<input type="text" id="itemQuantity" class= "addItemForm" placeholder="Item Quantity">
+		</form>
+		<div id="buttonsDiv"><button id="closeButton">X</button><button id="addButton">Y</button>
+	</div>
 
 <script src="scripts/Item.js"></script>
 <script src="scripts/Bag.js"></script>
