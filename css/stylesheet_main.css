@@ -71,4 +71,12 @@
 	left: 33%;
 }
 
+table#itemTable tr button{
+	opacity: 0;
+}
+
+table#itemTable tr:hover button{
+	opacity: 1;
+}
+
 

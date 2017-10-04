@@ -44,6 +44,11 @@ document.getElementById("closeButton").addEventListener("click",closePrompt);
 	name and quanity to the list item and then appends
 	the listitem to the listcontainer
 */
+function increaseOnScreenQuantity(local, quantity){
+	Bag.increaseItemQuantity(local, quantity);
+	document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
+}
+
 function createNewListItem(newItem, itemLocal){
 		var listItem = document.createElement("div");
 		listItem.className = "listItem";
@@ -62,8 +67,9 @@ function createNewListItem(newItem, itemLocal){
 		listContainer.appendChild(listItem);
 }
 
-function createNewTableRow(newItem){
+function createNewTableRow(newItem, itemLocal){
 	var row = document.createElement("tr");
+
 	var mButton = document.createElement("button");
 	var pButton = document.createElement("button");
 
@@ -86,12 +92,14 @@ function createNewTableRow(newItem){
 	quantity.innerHTML = ""+newItem.itemQuantity;
 	quantity.style.width = "6.67%";
 	quantity.style.textAlign = "center";
+	quantity.id = ""+itemLocal;
 	row.appendChild(quantity);
 
 	var plusButton = document.createElement("td");
 	plusButton.appendChild(pButton);
 	plusButton.style.width = "6.67%";
 	plusButton.style.textAlign = "center";
+	plusButton.addEventListener("click",function(){increaseOnScreenQuantity(itemLocal, 1);});
 	row.appendChild(plusButton);
 
 	itemTable.appendChild(row);
@@ -112,14 +120,15 @@ function addItem(){
 	var local = Bag.checkBagLocation(name.value);
 
 	if(local!=-1){
-		Bag.increaseItemQuantity(local, quantity.value);
-		document.getElementById(""+local).lastElementChild.innerHTML = ""+Bag.getContents(local).itemQuantity;
+		increaseOnScreenQuantity(local, quantity.value);
+		// Bag.increaseItemQuantity(local, quantity.value);
+		// document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
 	}
 
 	else{
 		var newItem = new Item(name.value, weight.value, quantity.value);
 		var itemLocal = Bag.addItemToBag(newItem);
-		createNewTableRow(newItem);
+		createNewTableRow(newItem, itemLocal);
 		//createNewListItem(newItem, itemLocal);
 	}
 
