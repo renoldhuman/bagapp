@@ -1,7 +1,5 @@
 var Bag = new Bag(1000);
 
-
-
 var tWeightContainer = document.createElement("div");//container for totalweight in document
 var tWeightText = document.createElement("p");//paragraph tag for tweight text
 tWeightText.id="weightText";
@@ -10,10 +8,6 @@ tWeightText.innerHTML = "Total Weight: "+Bag.getTotalWeight(); //gets the totalw
 tWeightContainer.appendChild(tWeightText);
 document.body.appendChild(tWeightContainer);//allows the totalweight sting to be viewed on the string
 
-
-// var listContainer = document.createElement("div");//container for entire list on document
-// listContainer.id = "listContainer";
-// document.body.appendChild(listContainer);
 
 var itemTable = document.createElement("table")
 itemTable.id = "itemTable";
@@ -24,18 +18,6 @@ document.getElementById("addItemButton").addEventListener("click",addItemPrompt)
 document.getElementById("addButton").addEventListener("click",addItem);
 document.getElementById("closeButton").addEventListener("click",closePrompt);
 
-//Makes a popup appear in the middle of the screen 
-
-// function makePopUp(w, h, id){
-// 	var popup = document.createElement("div");
-// 	popup.id = id;
-// 	popup.className = "popup";
-// 	popup.style.width = "" + w + "px";
-// 	popup.style.height = "" + h + "px";
-// 	popup.style.marginLeft = ""+ -w/2 + "px";
-// 	popup.style.marginTop = ""+ -h/1.6 + "px";
-// 	document.body.appendChild(popup);
-// }
 
 
 /*
@@ -70,7 +52,7 @@ function createNewListItem(newItem, itemLocal){
 		listItemQuantity.innerHTML = ""+newItem.itemQuantity;
 		listItemQuantity.className = "Quantity";
 		listItem.appendChild(listItemQuantity);
-		
+
 		listContainer.appendChild(listItem);
 }
 
@@ -84,7 +66,7 @@ function createNewTableRow(newItem, itemLocal){
 	pButton.innerHTML = "+";
 
 	var itemName = document.createElement("td");
-	itemName.innerHTML = ""+newItem.itemName;
+	itemName.innerHTML = ""+newItem.itemName + " (" +newItem.itemWeight +")";
 	itemName.style.width = "80%";
 	row.appendChild(itemName);
 
@@ -93,7 +75,6 @@ function createNewTableRow(newItem, itemLocal){
 	minusButton.style.width = "6.67%";
 	minusButton.style.textAlign = "center";
 	minusButton.addEventListener("click",function(){decreaseOnScreenQuantity(itemLocal, 1);});
-	//minusButton.style.display = "none";
 	row.appendChild(minusButton);
 
 	var quantity = document.createElement("td");
@@ -117,7 +98,7 @@ function addItem(){
 	var name = document.getElementById("itemName");
 	var weight = document.getElementById("itemWeight");
 	var quantity = document.getElementById("itemQuantity");
-	
+
 	if(weight.value!=null){
 		if(weight.value<0||quantity.value<=0){
 		console.log("please enter proper weight and quantity");
@@ -159,7 +140,3 @@ function closePrompt(){
 function addItemPrompt(){
 	document.getElementById("popdiv").style.display = "initial";
 }
-
-
-
-

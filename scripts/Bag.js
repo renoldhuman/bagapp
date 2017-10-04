@@ -4,7 +4,6 @@ function Bag(maxWeight){
 	 this.totalWeight = 0;
 	 this.maxWeight = maxWeight;
 
-
 	this.getContents = function (i){
 		if(arguments.length==0){
 			return this.contents;
@@ -17,10 +16,7 @@ function Bag(maxWeight){
 	}
 
 	this.checkBagLocation = function(name){
-		//console.log(name);
-		//console.log(this.contents.length);
 		for(i=0;i<this.contents.length;i++){
-		//	console.log(this.contents[i].itemName);
 			if(this.contents[i].itemName===name){
 				return i;
 			}
@@ -28,11 +24,14 @@ function Bag(maxWeight){
 		return -1;
 	}
 
-	this.increaseItemQuantity = function(i,amount){
-		//console.log(this.contents[i].quantity);
-		var newAmount = Number.parseInt(this.contents[i].itemQuantity) + Number.parseInt(amount);
+	this.increaseItemQuantity = function(i,pAmount){
+		var amount = Number.parseInt(pAmount);
+		if(this.checkBagWeight(this.contents[i].itemWeight * amount) != -1){
+			//Throw error here
+			return;
+		}
+		var newAmount = Number.parseInt(this.contents[i].itemQuantity) + amount;
 		this.contents[i].itemQuantity = newAmount;
-		//console.log(this.contents[i].quantity);
 		this.totalWeight += this.contents[i].itemWeight * amount;
 	}
 
@@ -43,44 +42,27 @@ function Bag(maxWeight){
 	}
 
 	this.addItemToBag = function(toAdd){
-		// if(addAmount <= 0 || toAdd == null){
-		// 	//throw error here
+		if(this.checkBagWeight(toAdd.itemWeight * toAdd.itemQuantity) != -1){
+			//Throw error here
+			console.log("Exited function due to Bag Weight");
+			return FALSE;
+		}
 
-		// }
-		// var location = this.checkBagLocation(toAdd.itemName);
-		
-		// if(location>0){
-		// 	this.contents[location].increaseItemQuantity(addAmount);
-		// }
-
-		// else{
-		// 	var bagItem = {
-		// 		item: "toAdd",
-		// 		quantity: "addAmount",
-		// 		getItemQuantity: function(){
-		// 			return this.quantity;
-		// 		},
-		// 		decreaseItemQuantity: function(amount){
-		// 			this.quantity-=amount;
-		// 		},
-		// 		increaseItemQuantity: function(amount){
-		// 			this.quantity+=amount;
-		// 		}
-		// 	};
-		// this.contents.push(bagItem);
-		// }
 		this.contents.push(toAdd);
 		this.totalWeight += toAdd.itemWeight * toAdd.itemQuantity;
 		return this.contents.length-1;
-		//return location;
 	}
 
-	// this.bagItem = function bagItem(item, amount){
-	// 	this.item = item;
-	// 	this.quantity = amount; 
+	this.checkBagWeight = function(amount){
+			var newVal = this.totalWeight + Number.parseInt(amount);
 
-	// 	this.getItemQuantity = function(){
-	// 		return ""+this.quantity;
-	// 	}
-	// }
+			if(newVal > this.maxWeight){
+				//Throw error here (popup)
+				alert("Cannot add item: Bag is too heavy");
+				return 0;
+			}
+
+		return -1;
+	}
+
 }

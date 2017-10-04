@@ -5,8 +5,16 @@
 #weightText{
 	position: relative;
 	left: 50%;
-	width: 123px;
+	width: 200px;
 	margin-left: -62.5px;
+	font-size: 20px;
+	text-decoration: underline;
+}
+
+#addItemButton{
+	position: relative;
+	left: 50%;
+	margin-left: -31px;
 }
 
 /*#listContainer{
@@ -26,7 +34,7 @@
 	left:50%;
 	margin-left: -83px;
 	/*margin-top: 3.5%;*/
-	
+
 }
 
 .Quantity, #addButton{
@@ -66,9 +74,11 @@
 }
 
 #itemTable{
-	width: 33%;
+	width: 61.8%;
 	position: relative;
-	left: 33%;
+	left: 19.1%;
+	font-size: 20px;
+	border-spacing: 15px;
 }
 
 table#itemTable tr button{
@@ -78,5 +88,3 @@ table#itemTable tr button{
 table#itemTable tr:hover button{
 	opacity: 1;
 }
-
-
