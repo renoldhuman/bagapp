@@ -47,6 +47,13 @@ document.getElementById("closeButton").addEventListener("click",closePrompt);
 function increaseOnScreenQuantity(local, quantity){
 	Bag.increaseItemQuantity(local, quantity);
 	document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
+	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
+}
+
+function decreaseOnScreenQuantity(local, quantity){
+	Bag.decreaseItemQuantity(local, quantity);
+	document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
+	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
 }
 
 function createNewListItem(newItem, itemLocal){
@@ -85,6 +92,7 @@ function createNewTableRow(newItem, itemLocal){
 	minusButton.appendChild(mButton);
 	minusButton.style.width = "6.67%";
 	minusButton.style.textAlign = "center";
+	minusButton.addEventListener("click",function(){decreaseOnScreenQuantity(itemLocal, 1);});
 	//minusButton.style.display = "none";
 	row.appendChild(minusButton);
 
@@ -129,10 +137,9 @@ function addItem(){
 		var newItem = new Item(name.value, weight.value, quantity.value);
 		var itemLocal = Bag.addItemToBag(newItem);
 		createNewTableRow(newItem, itemLocal);
+		tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
 		//createNewListItem(newItem, itemLocal);
 	}
-
-	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
 
 	name.value = null;
 	weight.value = null;

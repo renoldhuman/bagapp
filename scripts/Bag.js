@@ -37,7 +37,8 @@ function Bag(maxWeight){
 	}
 
 	this.decreaseItemQuantity = function(i,amount){
-		this.contents[i].quantity -= amount;
+		var newAmount = Number.parseInt(this.contents[i].itemQuantity) - Number.parseInt(amount);
+		this.contents[i].itemQuantity = newAmount;
 		this.totalWeight -= this.contents[i].itemWeight * amount;
 	}
 
