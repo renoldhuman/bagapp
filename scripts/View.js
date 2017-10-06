@@ -28,14 +28,18 @@ document.getElementById("closeButton").addEventListener("click",closePrompt);
 */
 function increaseOnScreenQuantity(local, quantity){
 	Bag.increaseItemQuantity(local, quantity);
-	document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
+	document.getElementById(""+local).childNodes[2].innerHTML = ""+Bag.getContents(local).itemQuantity;
 	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
 }
 
 function decreaseOnScreenQuantity(local, quantity){
-	Bag.decreaseItemQuantity(local, quantity);
-	document.getElementById(""+local).innerHTML = ""+Bag.getContents(local).itemQuantity;
+	var status = Bag.decreaseItemQuantity(local, quantity);
 	tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
+	if(status > 0){
+		removeItem(local);
+		return;
+	}
+	document.getElementById(""+local).childNodes[2].innerHTML = ""+Bag.getContents(local).itemQuantity;
 }
 
 function createNewListItem(newItem, itemLocal){
@@ -58,6 +62,7 @@ function createNewListItem(newItem, itemLocal){
 
 function createNewTableRow(newItem, itemLocal){
 	var row = document.createElement("tr");
+	row.id = ""+itemLocal;
 
 	var mButton = document.createElement("button");
 	var pButton = document.createElement("button");
@@ -81,7 +86,6 @@ function createNewTableRow(newItem, itemLocal){
 	quantity.innerHTML = ""+newItem.itemQuantity;
 	quantity.style.width = "6.67%";
 	quantity.style.textAlign = "center";
-	quantity.id = ""+itemLocal;
 	row.appendChild(quantity);
 
 	var plusButton = document.createElement("td");
@@ -92,6 +96,11 @@ function createNewTableRow(newItem, itemLocal){
 	row.appendChild(plusButton);
 
 	itemTable.appendChild(row);
+}
+
+function removeItem(local){
+	var rItem = document.getElementById(""+local);
+	document.getElementById("itemTable").removeChild(rItem);
 }
 
 function addItem(){
@@ -106,7 +115,9 @@ function addItem(){
 		}
 	}
 
-	var local = Bag.checkBagLocation(name.value);
+//do checking by upper/lower case
+
+	var local = Bag.getItemIDByName(name.value);
 
 	if(local!=-1){
 		increaseOnScreenQuantity(local, quantity.value);
@@ -115,7 +126,7 @@ function addItem(){
 	}
 
 	else{
-		var newItem = new Item(name.value, weight.value, quantity.value);
+		var newItem = new Item(name.value, weight.value, quantity.value, Bag.getItemCount());
 		var itemLocal = Bag.addItemToBag(newItem);
 		createNewTableRow(newItem, itemLocal);
 		tWeightText.innerHTML = "Total Weight: "+ Bag.getTotalWeight();
@@ -139,4 +150,5 @@ function closePrompt(){
 
 function addItemPrompt(){
 	document.getElementById("popdiv").style.display = "initial";
+	document.getElementById("itemName").focus();
 }
